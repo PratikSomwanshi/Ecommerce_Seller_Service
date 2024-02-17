@@ -1,13 +1,13 @@
 const express = require("express");
 const morgan = require("morgan");
-const imageUpload = require("express-fileupload");
+const cors = require("cors");
 
 const { ServerConfig, DBConnect } = require("./config");
 const apiRoutes = require("./routes");
 
 const app = express();
 
-app.use(imageUpload());
+app.use(cors());
 
 app.use(morgan(":method :url :status :response-time ms :date[web]"));
 app.use(express.json());

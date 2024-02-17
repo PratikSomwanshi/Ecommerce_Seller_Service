@@ -9,6 +9,7 @@ const sellerSchema = new mongoose.Schema(
         email: {
             type: String,
             required: true,
+            unique: true,
         },
         password: {
             type: String,
@@ -17,6 +18,7 @@ const sellerSchema = new mongoose.Schema(
         shop_name: {
             type: String,
             required: true,
+            unique: true,
         },
         products: {
             type: [mongoose.Schema.ObjectId],

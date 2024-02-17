@@ -1,1 +1,3 @@
-module.exports = {};
+module.exports = {
+    SellerMiddleware: require("./seller.middleware"),
+};

@@ -16,6 +16,39 @@ async function createController(req, res) {
 
         SuccessResponse.data = response;
 
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+        console.log(error);
+        ErrorResponse.error = error;
+        return res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+
+async function signIn(req, res) {
+    try {
+        const response = await sellerService.signIn({
+            email: req.body.email,
+            password: req.body.password,
+        });
+
+        SuccessResponse.data = response;
+
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+        console.log(error);
+        ErrorResponse.error = error;
+        return res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+
+async function authorization(req, res) {
+    try {
+        const response = await sellerService.authorization({
+            token: req.body.token,
+        });
+
+        SuccessResponse.data = response;
+
         return res.status(StatusCodes.BAD_REQUEST).json(SuccessResponse);
     } catch (error) {
         console.log(error);
@@ -26,4 +59,6 @@ async function createController(req, res) {
 
 module.exports = {
     createController,
+    signIn,
+    authorization,
 };
