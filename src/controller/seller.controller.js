@@ -57,8 +57,31 @@ async function authorization(req, res) {
     }
 }
 
+async function createProduct(req, res) {
+    try {
+        console.log();
+        const response = await sellerService.createProduct({
+            name: req.body.name,
+            description: req.body.description,
+            image: req.body.image,
+            price: req.body.price,
+            category: req.body.category,
+            seller: req.body.seller,
+        });
+
+        SuccessResponse.data = response;
+
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+        console.log(error);
+        ErrorResponse.error = error;
+        return res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+
 module.exports = {
     createController,
+    createProduct,
     signIn,
     authorization,
 };

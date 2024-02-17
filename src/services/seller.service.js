@@ -4,6 +4,7 @@ const { StatusCodes } = require("http-status-codes");
 const { Seller } = require("../models");
 const serverConfig = require("../config/server.config");
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 class SellerService extends SellerRepository {
     async createService(data) {
@@ -47,6 +48,7 @@ class SellerService extends SellerRepository {
             );
 
             let res = {};
+            res.id = user._id;
             res.email = user.email;
             res.token = token;
 
@@ -67,6 +69,42 @@ class SellerService extends SellerRepository {
             return valid;
         } catch (error) {
             throw error;
+        }
+    }
+
+    async createProduct(data) {
+        try {
+            console.log(data);
+            const seller = await Seller.findOne({
+                _id: data.seller,
+            });
+
+            if (!seller) {
+                throw new AppError("seller not found", StatusCodes.BAD_REQUEST);
+            }
+
+            const response = await fetch(
+                "http://localhost:5000/api/v1/products",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }
+            )
+                .then((res) => res.json())
+                .catch((error) => {
+                    throw new AppError(
+                        "Unable to fetch the data, maybe server is down",
+                        StatusCodes.BAD_REQUEST
+                    );
+                });
+
+            console.log(response);
+            return response.data;
+        } catch (error) {
+            throw new AppError(error, StatusCodes.BAD_REQUEST);
         }
     }
 }

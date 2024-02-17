@@ -11,10 +11,14 @@ router.post(
     SellerController.createController
 );
 
-router.post("/product", SellerProductController.uploadProductController);
-
 router.post("/signin", SellerController.signIn);
 
 router.post("/auth", SellerController.authorization);
+
+router.post(
+    "/product",
+    SellerMiddleware.productCreateMiddleware,
+    SellerController.createProduct
+);
 
 module.exports = router;
