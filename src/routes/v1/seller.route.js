@@ -1,8 +1,5 @@
 const router = require("express").Router();
-const {
-    SellerController,
-    SellerProductController,
-} = require("../../controller");
+const { SellerController } = require("../../controller");
 const { SellerMiddleware } = require("../../middlewares");
 
 router.post(
@@ -10,6 +7,8 @@ router.post(
     SellerMiddleware.createMiddleware,
     SellerController.createController
 );
+
+router.get("/:id", SellerController.getSeller);
 
 router.post("/signin", SellerController.signIn);
 

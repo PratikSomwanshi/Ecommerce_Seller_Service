@@ -5,6 +5,7 @@ const { Seller } = require("../models");
 const serverConfig = require("../config/server.config");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
+const mongoose = require("mongoose");
 
 class SellerService extends SellerRepository {
     async createService(data) {
@@ -104,6 +105,26 @@ class SellerService extends SellerRepository {
             console.log(response);
             return response.data;
         } catch (error) {
+            throw new AppError(error, StatusCodes.BAD_REQUEST);
+        }
+    }
+
+    async getSeller({ id }) {
+        try {
+            if (mongoose.isValidObjectId(id) == false) {
+                throw new AppError("id is not valid", StatusCodes.BAD_REQUEST);
+            }
+            const response = await this.get(id);
+
+            if (!response) {
+                throw new AppError("Seller not found", StatusCodes.BAD_REQUEST);
+            }
+            return response;
+        } catch (error) {
+            console.log(error);
+            if (error instanceof AppError) {
+                throw error;
+            }
             throw new AppError(error, StatusCodes.BAD_REQUEST);
         }
     }

@@ -79,9 +79,27 @@ async function createProduct(req, res) {
     }
 }
 
+async function getSeller(req, res) {
+    try {
+        console.log();
+        const response = await sellerService.getSeller({
+            id: req.params.id,
+        });
+
+        SuccessResponse.data = response;
+
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+        console.log(error);
+        ErrorResponse.error = error;
+        return res.status(error.statusCode).json(ErrorResponse);
+    }
+}
+
 module.exports = {
     createController,
     createProduct,
     signIn,
     authorization,
+    getSeller,
 };
