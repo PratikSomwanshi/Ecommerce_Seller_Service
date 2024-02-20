@@ -11,7 +11,6 @@ class CrudRepository {
     }
 
     async get(id) {
-        console.log(id);
         const response = await this.model.findOne({
             _id: id,
         });

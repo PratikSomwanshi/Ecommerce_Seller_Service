@@ -6,7 +6,6 @@ const sellerService = new SellerService();
 
 async function createController(req, res) {
     try {
-        console.log(this);
         const response = await sellerService.createService({
             name: req.body.name,
             email: req.body.email,
@@ -18,7 +17,6 @@ async function createController(req, res) {
 
         return res.status(StatusCodes.OK).json(SuccessResponse);
     } catch (error) {
-        console.log(error);
         ErrorResponse.error = error;
         return res.status(error.statusCode).json(ErrorResponse);
     }
@@ -35,7 +33,6 @@ async function signIn(req, res) {
 
         return res.status(StatusCodes.OK).json(SuccessResponse);
     } catch (error) {
-        console.log(error);
         ErrorResponse.error = error;
         return res.status(error.statusCode).json(ErrorResponse);
     }
@@ -51,7 +48,6 @@ async function authorization(req, res) {
 
         return res.status(StatusCodes.BAD_REQUEST).json(SuccessResponse);
     } catch (error) {
-        console.log(error);
         ErrorResponse.error = error;
         return res.status(error.statusCode).json(ErrorResponse);
     }
@@ -59,7 +55,6 @@ async function authorization(req, res) {
 
 async function createProduct(req, res) {
     try {
-        console.log();
         const response = await sellerService.createProduct({
             name: req.body.name,
             description: req.body.description,
@@ -73,7 +68,6 @@ async function createProduct(req, res) {
 
         return res.status(StatusCodes.OK).json(SuccessResponse);
     } catch (error) {
-        console.log(error);
         ErrorResponse.error = error;
         return res.status(error.statusCode).json(ErrorResponse);
     }
@@ -81,7 +75,6 @@ async function createProduct(req, res) {
 
 async function getSeller(req, res) {
     try {
-        console.log();
         const response = await sellerService.getSeller({
             id: req.params.id,
         });
@@ -90,7 +83,6 @@ async function getSeller(req, res) {
 
         return res.status(StatusCodes.OK).json(SuccessResponse);
     } catch (error) {
-        console.log(error);
         ErrorResponse.error = error;
         return res.status(error.statusCode).json(ErrorResponse);
     }

@@ -75,7 +75,6 @@ class SellerService extends SellerRepository {
 
     async createProduct(data) {
         try {
-            console.log(data);
             const seller = await Seller.findOne({
                 _id: data.seller,
             });
@@ -102,7 +101,6 @@ class SellerService extends SellerRepository {
                     );
                 });
 
-            console.log(response);
             return response.data;
         } catch (error) {
             throw new AppError(error, StatusCodes.BAD_REQUEST);
@@ -121,7 +119,6 @@ class SellerService extends SellerRepository {
             }
             return response;
         } catch (error) {
-            console.log(error);
             if (error instanceof AppError) {
                 throw error;
             }

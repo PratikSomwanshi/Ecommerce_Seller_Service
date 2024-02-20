@@ -5,7 +5,6 @@ const { StatusCodes } = require("http-status-codes");
 
 class SellerProductService extends SellerRepository {
     async uploadImage(data) {
-        console.log(data);
         return true;
         // try {
         //     const response = await axios.post(
@@ -16,7 +15,7 @@ class SellerProductService extends SellerRepository {
         //     );
         //     return response;
         // } catch (error) {
-        //     console.log(error);
+        //
         //     throw new AppError(error, StatusCodes.BAD_REQUEST);
         // }
     }
